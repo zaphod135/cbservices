@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <title>Report</title>
+    <style>
+      .container {
+        margin: auto;
+        width: 960px;
+      }
+
+      .header {
+        text-align: center;
+      }
+
+      table {
+        width: 100%;
+        margin-top: 50px;
+        margin-bottom: 200px;
+      }
+
+      table td, table th {
+        text-align: center
+      }
+
+      .break {
+        page-break-before: always
+      }
+    </style>
+  </head>
+
+  <body>
+    {% for contract in contracts %}
+      <div class="container">
+        <div class="header">
+          <h1 class="break">CONTRACT #{{ contract.number }}</h1>
+
+          <p>To {{ contract.get_type_display }} {{ contract.amount_as_metric_tons|floatformat:0 }}MT or {{ contract.amount }}LBS</p>
+          <p>{{ contract.product }}</p>
+
+          <p>{% if contract.type == 'p' %}From{% else %}To{% endif %} {{ contract.company }}</p>
+        </div>
+
+        {% if contract.type == 'p' %}
+          {% include "purchase_contract_include.html" %}
+        {% else %}
+          {% include "sell_contract_include.html" %}
+        {% endif %}
+
+      {% endfor %}
+      <p class="break"></p>
+    </div>
+  </body>
+</html>

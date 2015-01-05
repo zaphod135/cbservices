@@ -1,0 +1,24 @@
+<table>
+  <thead>
+    <tr>
+      <th>PO#</th>
+      <th>Contract</th>
+      <th>Purchaser</th>
+      <th>Product</th>
+      <th>LBS</th>
+      <th>Remaining LBS</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for po in contract.purchase_order_report %}
+      <tr>
+        <td>{{ po.number }}</td>
+        <td>{{ po.sell_contract.number }}</td>
+        <td>{{ po.sell_contract.company }}</td>
+        <td>{{ po.sell_contract.product }}</td>
+        <td>{{ po.amount }}</td>
+        <td>{{ po.remaining }}</td>
+      </tr>
+    {% endfor %}
+</table>
