@@ -66,11 +66,14 @@ class PurchaseOrder(TimestampedModel):
     purchase_contract = models.ForeignKey(Contract, related_name='purchase_orders')
     sell_contract = models.ForeignKey(Contract, related_name='sell_orders')
     amount = models.PositiveIntegerField(help_text="The amount in pounds.")
-
+    requested_shipping = models.DateField('Requested Shipping Date', blank=True, null=True)
+    actual_shipping = models.DateField('Actual Shipping Date', blank=True, null=True)
     def __unicode__(self):
         return "PO #{}, {} -> {}, {}".format(
             self.number,
             self.purchase_contract.company,
             self.purchase_contract.company,
-            self.amount
+            self.amount,
+            self.requested_shipping,
+            self.actual_shipping
         )
